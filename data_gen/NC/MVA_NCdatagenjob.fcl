@@ -1,0 +1,54 @@
+#include "services_dune.fcl"
+#include "energyreco.fcl"
+#include "mvamodule.fcl"
+#include "VLNEnergyDataGenConfigs.fcl"
+#include "resourcetracking_services.fcl"
+
+process_name: VLNEnergyDataGen
+
+# TODO: figure out how to setup TFileService without fileName
+services:
+{
+    TFileService: { fileName: "dummyfile.root" }
+    @table::standard_resourcetrackers
+    @table::dunefd_simulation_services
+}
+
+source:
+{
+    module_type: RootInput
+    maxEvents:   -1
+}
+
+physics:
+{
+    producers: {
+		mvaselectnumu: @local::dunefd_mvaselect
+		energyreconumu: @local::dunefd_nuenergyreco_pandora_numu
+	}
+    analyzers: { vlnenergydatagen: @local::dunefd_vlnenergydatagen_numu }
+
+    ana:  [ vlnenergydatagen ]
+    prod: [ mvaselectnumu, energyreconumu ]
+
+    trigger_paths: [ prod ]
+    end_paths:     [ ana ]
+}
+
+services.Geometry: @local::dune10kt_1x2x6_v2_geo
+
+# Method 1 -- using longest track
+
+physics.producers.mvaselectnumu.MVAMethod: "BDTG"
+physics.producers.energyreconumu.RecoMethod : 1
+
+physics.analyzers.vlnenergydatagen.IsCC : 0
+physics.analyzers.vlnenergydatagen.Flavor : "any"
+
+physics.producers.mvaselectnumu.Select: "numu"
+
+# FNAL paths
+physics.producers.mvaselectnumu.WeightFile:              "/pnfs/dune/persistent/TaskForce_AnaTree/far/train/v3/BDTG_numu.weights.xml"
+
+# Caltech paths
+#physics.producers.mvaselectnumu.WeightFile:              "/nfs/raid11/dunedata/TaskForce_AnaTree/far/train/v3/BDTG_numu.weights.xml"

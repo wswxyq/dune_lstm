@@ -1,0 +1,3 @@
+The fcl works with dunetpc <= v09.24.00
+The job to produce CC samples failed in grid with dunetpc v09.24.00. We need to add MVAselection in fcl.
+I think it is fixed in NC samples after dunetpc v09.41.00.02 or earlier.

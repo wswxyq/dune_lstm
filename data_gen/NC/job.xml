@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE project [
+<!ENTITY release  "v09_41_00_02">
+<!ENTITY name     "rnne_dgen">
+<!ENTITY inputdef "prodgenie_nu_dune10kt_1x2x6_mcc11_lbl_reco">
+<!ENTITY outdir   "/pnfs/dune/scratch/users/wus/2022-04-18_rnne_NC_250">
+]>
+<project name="&name;">
+  <inputdef>&inputdef;</inputdef>
+  <group>dune</group>
+  <numevents>10000000</numevents>
+  <os>SL7</os>
+  <resource>DEDICATED,OPPORTUNISTIC</resource>
+  <larsoft>
+    <tag>&release;</tag>
+    <qual>e20:prof</qual>
+    <local>/pnfs/dune/resilient/users/wus/test_v09_41_00.tar</local>
+  </larsoft>
+  <stage name="&name;">
+    <fcl>/dune/data/users/wus/NC/NCdatagenjob.fcl</fcl>
+    <inputdef>&inputdef;</inputdef>
+    <schema>root</schema>
+    <outdir>&outdir;/&release;/&name;</outdir>
+    <workdir>&outdir;/work/&release;/&name;</workdir>
+    <datafiletypes>csv</datafiletypes>
+    <numjobs>250</numjobs>
+    <maxfilesperjob>250</maxfilesperjob>
+    <datatier>&name;</datatier>
+  </stage>
+</project>

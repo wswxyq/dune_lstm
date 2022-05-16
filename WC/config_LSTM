@@ -1,0 +1,4 @@
+# source this file for env setting of LSTM_ee
+export PYTHONPATH="/work1/nova/wus/lstm_ee:${PYTHONPATH}"
+export LSTM_EE_DATADIR="/work1/nova/wus/data"
+export LSTM_EE_OUTDIR="/work1/nova/wus/lstm_out"
