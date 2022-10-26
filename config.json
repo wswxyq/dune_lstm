@@ -1,0 +1,93 @@
+{
+    "batch_size": 1024,
+    "dataset": "dune/NC/2022-08-21_rnne_NC_250_fGScatter_20MeV_KE_cut.csv.xz",
+    "early_stop": {
+        "kwargs": {
+            "min_delta": 0,
+            "monitor": "val_loss",
+            "patience": 40
+        },
+        "name": "standard"
+    },
+    "epochs": 200,
+    "loss": "mean_absolute_percentage_error",
+    "max_prongs": null,
+    "model": {
+        "kwargs": {
+            "batchnorm": true,
+            "layers_post": [
+                128,
+                128,
+                128
+            ],
+            "layers_pre": [
+                128,
+                128,
+                128
+            ],
+            "lstm_units": 32,
+            "n_resblocks": 0
+        },
+        "name": "lstm_v2"
+    },
+    "noise": null,
+    "optimizer": {
+        "kwargs": {
+            "lr": 0.001
+        },
+        "name": "RMSprop"
+    },
+    "prong_sorters": null,
+    "regularizer": {
+        "kwargs": {
+            "l": 0.001
+        },
+        "name": "l1"
+    },
+    "schedule": {
+        "kwargs": {
+            "cooldown": 0,
+            "factor": 0.5,
+            "monitor": "val_loss",
+            "patience": 5
+        },
+        "name": "standard"
+    },
+    "seed": 0,
+    "steps_per_epoch": 250,
+    "test_size": 0.2,
+    "var_target_primary": "mc.lepE",
+    "var_target_total": "mc.nuE",
+    "vars_input_png2d": null,
+    "vars_input_png3d": [
+        "particle.is_shower",
+        "particle.length",
+        "particle.start.x",
+        "particle.start.y",
+        "particle.start.z",
+        "particle.dir.x",
+        "particle.dir.y",
+        "particle.dir.z",
+        "particle.energy",
+        "particle.calE",
+        "particle.charge",
+        "particle.nHit"
+    ],
+    "vars_input_slice": [
+        "event.calE",
+        "event.charge",
+        "event.nHits"
+    ],
+    "weights": {
+        "kwargs": {
+            "bins": 50,
+            "clip": 50,
+            "range": [
+                0,
+                5
+            ],
+            "var": "mc.nuE"
+        },
+        "name": "flat"
+    }
+}
