@@ -3,3 +3,6 @@
 *.pyc
 *.pdf
 *.pkl
+*.png
+*.npz
+*.xz
